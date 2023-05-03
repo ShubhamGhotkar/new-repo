@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-const List = ({ setCallBack, callBack ,data}) => {
-
+const List = ({ setCallBack, callBack, data }) => {
   const handleDelete = async (id) => {
     let res = await fetch(`/delete/${id}`, {
       method: "Delete",
@@ -22,17 +21,24 @@ const List = ({ setCallBack, callBack ,data}) => {
   return (
     <>
       {data.map((val, ind) => {
-        const { name, value, catId, category, _id } = val;
+        const { name, value, category } = val;
+
         return (
           <tr key={ind}>
             <th id="F-th">{ind + 1}</th>
             <th>{name}</th>
-            <th>{_id}</th>
+            <th>{val._id}</th>
             <th>{value}</th>
-            <th>{category}</th>
-            <th>{catId}</th>
+            <th>{category.category}</th>
+            <th>{category.id}</th>
             <th>
-              <button className="btn" onClick={() => handleEdit(val._id)}>
+              <button
+                className="btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleEdit(val._id);
+                }}
+              >
                 Edit
               </button>
               <button className="btn" onClick={() => handleDelete(val._id)}>

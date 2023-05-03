@@ -12,7 +12,7 @@ const AddProduct = () => {
             tittle: "Save",
             name: "Back To  Product List",
             path: "/list",
-            callBack:{ id: "", Click: false }
+            callBack: { id: "", Click: false },
           }}
         />
       </div>

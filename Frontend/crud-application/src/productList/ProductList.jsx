@@ -7,8 +7,8 @@ import "./style.css";
 const ProductList = () => {
   const [callBack, setCallBack] = useState({ id: "", Click: false });
   const [data, setData] = useState([]);
-  
-  const [limit, setLimit] = useState(6);
+
+  const [limit] = useState(10);
   const [pageCount, setPageCount] = useState(1);
 
   const currentPage = useRef();
@@ -16,10 +16,10 @@ const ProductList = () => {
   useEffect(() => {
     currentPage.current = 1;
     // getPaginatedProduct();
-  },[]);
+  }, []);
   useEffect(() => {
     getPaginatedProduct();
-  },[data,handlePageClick,]);
+  }, [data, handlePageClick]);
 
   function handlePageClick(e) {
     currentPage.current = e.selected + 1;
@@ -30,7 +30,7 @@ const ProductList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setData(data.result)
+        setData(data.result);
         setPageCount(data.pageCount);
       });
   }
@@ -41,13 +41,13 @@ const ProductList = () => {
         <table class="table">
           <thead class="thead-dark">
             <tr id="tr">
-              <th >Sr No</th>
-              <th >Product Name</th>
-              <th >Product ID</th>
-              <th >Total Items</th>
-              <th >Category Name</th>
-              <th >Category Id</th>
-              <th >Edit / Delete</th>
+              <th>Sr No</th>
+              <th>Product Name</th>
+              <th>Product ID</th>
+              <th>Total Items</th>
+              <th>Category Name</th>
+              <th>Category Id</th>
+              <th>Edit / Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +55,7 @@ const ProductList = () => {
               id="list-comp"
               setCallBack={setCallBack}
               callBack={callBack}
-              data ={data}
+              data={data}
               getPaginatedProduct={getPaginatedProduct}
             />
           </tbody>
@@ -66,32 +66,30 @@ const ProductList = () => {
             tittle: "Update",
             callBack: callBack,
             name: "Back To Add Product",
-            path: "/",
-            setData:setData
+            path: "/add-product",
+            setData: setData,
           }}
-
-          
         />
       </div>
       <div id="pagination">
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-        marginPagesDisplayed={2}
-        containerClassName="pagination justify-content-center"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        activeClassName="active"
-      />
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          marginPagesDisplayed={2}
+          containerClassName="pagination justify-content-center"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          activeClassName="active"
+        />
       </div>
     </div>
   );
